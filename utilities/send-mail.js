@@ -70,6 +70,10 @@ exports.send = (currentComment, parentComment)=> {
         || parentComment.get('mail') === process.env.SMTP_USER) {
         return;
     }
+    // 自己@自己不需要提醒
+    if (parentComment.get('mail') === currentComment.get('mail')){
+        return;
+    }
     
     let PARENT_NICK = parentComment.get('nick');
     let SITE_NAME = process.env.SITE_NAME;
